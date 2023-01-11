@@ -17,7 +17,15 @@ let clientCount = 0;
     /**
      * Broadcast the messages to all the client
      */
-     io.sockets.emit('broadcast',{description:"clients connected ="+ clientCount})
+    //io.sockets.emit('broadcast',{description:"clients connected ="+ clientCount})
+     /**
+     * Broadcast the messages to all the client except this one
+     */
+    // For the client which is getting connected
+     socket.emit('newClientconnected',{description:"Hey welcome"});
+     // For broadcasting to every other client
+    socket.broadcast.emit('newClientconnected',{description:"Client count:"+clientCount})
+    
     // socket.on("clientEvent",(data)=>{
     //     console.log(data);
     // }) // read data from client
@@ -32,7 +40,7 @@ let clientCount = 0;
     socket.on('disconnect',()=>{
         console.log("One client disconnected");
         clientCount--;
-        io.sockets.emit('broadcast',{description:"clients connected ="+ clientCount})
+        io.sockets.emit('newClientconnected',{description:"clients connected ="+ clientCount})
 
     })
  })

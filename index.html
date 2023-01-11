@@ -16,10 +16,21 @@
          * send data from client events
         */
        //socket.emit('clientEvent',"An event send from the client");
-       socket.on('broadcast',function(data){
+       /*
+       Broadcast data to all client
+       */
+    //    socket.on('broadcast',function(data){
+    //     document.body.innerHTML = "";
+    //     document.write(data.description);
+    //    })
+        /**
+         * Brodcast data to all client except one(That recentaly join)
+        */
+    socket.on('newClientconnected',function(data){
         document.body.innerHTML = "";
         document.write(data.description);
        })
+
     </script>
     <body>
         <h1>Hi Pancham....</h1>
