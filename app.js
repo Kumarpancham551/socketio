@@ -11,7 +11,12 @@ const io = socket(http);
  */
  io.on('connection',(socket)=>{
     console.log("One Client connected")
-
+    /**
+     * Send some message to the client after 5 seconds of connection
+     */
+    setTimeout(()=>{
+        socket.send("Hello from the server after 5 seconds atleast");
+    },5000);
     // when the client closed
     socket.on('disconnect',()=>{
         console.log("One client disconnected");
