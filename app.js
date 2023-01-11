@@ -9,9 +9,15 @@ const io = socket(http);
 /**
  * Event when the client tries to connect to the server
  */
+let clientCount = 0;
  io.on('connection',(socket)=>{
-    console.log("One Client connected")
+    console.log("One Client connected");
+    clientCount++;
 
+    /**
+     * Broadcast the messages to all the client
+     */
+     io.sockets.emit('broadcast',{description:"clients connected ="+ clientCount})
     // socket.on("clientEvent",(data)=>{
     //     console.log(data);
     // }) // read data from client
@@ -19,12 +25,15 @@ const io = socket(http);
      * Send some message to the client after 5 seconds of connection
      */
 
-    setTimeout(()=>{
-        socket.send("Hello from the server after 5 seconds atleast");
-    },5000);
+    // setTimeout(()=>{
+    //     socket.send("Hello from the server after 5 seconds atleast");
+    // },5000);
     // when the client closed
     socket.on('disconnect',()=>{
         console.log("One client disconnected");
+        clientCount--;
+        io.sockets.emit('broadcast',{description:"clients connected ="+ clientCount})
+
     })
  })
 
