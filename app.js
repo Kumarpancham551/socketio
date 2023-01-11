@@ -11,9 +11,14 @@ const io = socket(http);
  */
  io.on('connection',(socket)=>{
     console.log("One Client connected")
+
+    // socket.on("clientEvent",(data)=>{
+    //     console.log(data);
+    // }) // read data from client
     /**
      * Send some message to the client after 5 seconds of connection
      */
+
     setTimeout(()=>{
         socket.send("Hello from the server after 5 seconds atleast");
     },5000);

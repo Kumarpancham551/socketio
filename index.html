@@ -6,9 +6,16 @@
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        socket.on('message',function(data){
-            document.write(data)
-        });
+        /*
+         to read data from server events
+        */
+        // socket.on('message',function(data){
+        //     document.write(data)
+        // });
+        /**
+         * send data from client events
+        */
+       socket.emit('clientEvent',"An event send from the client");
     </script>
     <body>
         <h1>Hi Pancham....</h1>
